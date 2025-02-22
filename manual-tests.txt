@@ -61,4 +61,11 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 ## Expected results
 * Should display "Developer" for the user name.
 
+# Module 4: Display only numerical input in card field
 
+## Test steps
+1. Build and run CiCo.
+2. Enter anything other than 0-9 into the field.
+
+## Expected results
+* Beep is heard and card field remains blank.
