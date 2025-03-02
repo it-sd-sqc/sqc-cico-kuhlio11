@@ -293,6 +293,13 @@ public class Main {
     labelState.setForeground(Color.magenta);
     panelStatus.add(labelState);
 
+    // Added "Back" button
+    JButton backButton = new JButton("Back");
+    backButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    backButton.setForeground(Color.green);
+    backButton.addActionListener(new Handler()); // Handler to go back to the main screen
+    panelStatus.add(backButton);
+
     panelStatus.add(Box.createVerticalGlue());
 
     // Error panel ////////////////////////////////////////////////////////////
