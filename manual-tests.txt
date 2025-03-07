@@ -84,3 +84,14 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 
 ## Expected results
 * Check in/out screen displays immediately.
+
+---------------------------------------
+
+# Module 6: Ticket 601 Automatic submit
+
+## Test steps
+1. Build and run CiCo.
+2. Enter 00000000 into the field
+
+# Expected results
+* Check in/out screen displays immediately.
