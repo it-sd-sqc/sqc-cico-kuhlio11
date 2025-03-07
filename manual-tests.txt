@@ -39,8 +39,9 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 ## Expected results
 * The version number should be displayed after "CiCo" at the bottom.
 
+---------------------------------------
 
-# Module 3: Visibility of system status 
+# Module 3: Visibility of system status
 
 ## Test steps
 1. Build and run CiCo.
@@ -61,4 +62,25 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 ## Expected results
 * Should display "Developer" for the user name.
 
+---------------------------------------
 
+# Module 4: Display only numerical input in card field
+
+## Test steps
+1. Build and run CiCo.
+2. Enter anything other than 0-9 into the field.
+
+## Expected results
+* Beep is heard and card field remains blank.
+
+---------------------------------------
+
+# Module 5: Back button on Checked In/Out screen
+
+## Test steps
+1. Build and run CiCo.
+2. Enter 00000000 into the field and click Update.
+3. Click Back.
+
+## Expected results
+* Check in/out screen displays immediately.

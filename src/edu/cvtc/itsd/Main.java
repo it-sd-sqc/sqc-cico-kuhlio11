@@ -39,26 +39,30 @@ public class Main {
 
     @Override
     public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
+            throws BadLocationException
     {
-      if (fb.getDocument() != null) {
-        super.insertString(fb, offset, stringToAdd, attr);
-      }
-      else {
+      if (!stringToAdd.matches("[0-9]*")) {
+        // Only allow numeric input by not calling super.insertString
         Toolkit.getDefaultToolkit().beep();
+        return;
       }
+
+      // Insert numeric input
+      super.insertString(fb, offset, stringToAdd, attr);
     }
 
     @Override
     public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
-        throws BadLocationException
+            throws BadLocationException
     {
-      if (fb.getDocument() != null) {
-        super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
-      }
-      else {
+      if (!stringToAdd.matches("[0-9]*")) {
+        // Only allow numeric input by not calling super.replace
         Toolkit.getDefaultToolkit().beep();
+        return;
       }
+
+      // Replace text with numeric input
+      super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
     }
   }
 
@@ -288,6 +292,13 @@ public class Main {
     labelState.setAlignmentX(JComponent.CENTER_ALIGNMENT);
     labelState.setForeground(Color.magenta);
     panelStatus.add(labelState);
+
+    // Added "Back" button
+    JButton backButton = new JButton("Back");
+    backButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    backButton.setForeground(Color.green);
+    backButton.addActionListener(new Handler()); // Handler to go back to the main screen
+    panelStatus.add(backButton);
 
     panelStatus.add(Box.createVerticalGlue());
 
