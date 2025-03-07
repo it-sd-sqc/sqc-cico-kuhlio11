@@ -36,34 +36,44 @@ public class Main {
   // InputFilter manages user input to the card number field.
   private static class InputFilter extends DocumentFilter {
     private static final int MAX_LENGTH = 8;
+    
 
     @Override
     public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
             throws BadLocationException
     {
-      if (!stringToAdd.matches("[0-9]*")) {
+      if (fb.getDocument() == null || offset >= MAX_LENGTH || !stringToAdd.matches("^[0-9]*$")) {
         // Only allow numeric input by not calling super.insertString
+        // Limit characters to MAX_LENGTH and reject null input.
         Toolkit.getDefaultToolkit().beep();
         return;
       }
 
       // Insert numeric input
       super.insertString(fb, offset, stringToAdd, attr);
+      if (fb.getDocument().getLength() == MAX_LENGTH ){
+        Main.processCard();
+      }
     }
 
     @Override
     public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
             throws BadLocationException
     {
-      if (!stringToAdd.matches("[0-9]*")) {
+      if (fb.getDocument() == null || offset >= MAX_LENGTH || !stringToAdd.matches("^[0-9]*$")) {
         // Only allow numeric input by not calling super.replace
+        // Limit characters to MAX_LENGTH and reject null input.
         Toolkit.getDefaultToolkit().beep();
         return;
       }
 
       // Replace text with numeric input
       super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
+      if (fb.getDocument().getLength() == MAX_LENGTH ){
+        Main.processCard();
+      }
     }
+    
   }
 
   // Lookup the card information after button press ///////////////////////////
@@ -231,6 +241,7 @@ public class Main {
 
     // Create our GUI.
     JFrame frame = new JFrame();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set GUI to exit on close
     frame.setMinimumSize(new Dimension(320, 240));
     frame.setPreferredSize(new Dimension(640, 480));
     frame.setMaximumSize(new Dimension(640, 480));
@@ -263,13 +274,7 @@ public class Main {
     fieldNumber.setBackground(Color.green);
     fieldNumber.setForeground(Color.magenta);
     panelMain.add(fieldNumber);
-
-    JButton updateButton = new JButton("Update");
-    updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    updateButton.addActionListener(new Update());
-    updateButton.setForeground(Color.green);
-    panelMain.add(updateButton);
-
+    
     panelMain.add(Box.createVerticalGlue());
 
     // Status panel ///////////////////////////////////////////////////////////
